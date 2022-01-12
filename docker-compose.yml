@@ -23,6 +23,8 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - application
+    dns:
+      - 172.16.100.1
 
   application:
     build: ./${APP_FOLDER}
@@ -31,3 +33,5 @@ services:
       - FLASK_ENV=${FLASK_ENV}
     ports:
       - 5000:5000
+    dns:
+      - 172.16.100.1

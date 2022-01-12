@@ -1,11 +1,13 @@
 # Flask app Dockerfile
-FROM python:3.8-alpine
+FROM python:3.10-alpine
 
+RUN python -m pip install --upgrade pip
 # Install needed dependencies for our app to run.
 RUN apk update \
   && apk add --no-cache \
     gcc \
     libffi-dev \
+    librdkafka-dev \
     musl-dev
 
 WORKDIR /opt/app
@@ -29,6 +31,7 @@ ENV PATH="/home/$USER/.local/bin:${PATH}"
 # Copy requirements file to our container, install, and remove
 # files to we don't need to reduce the container size
 COPY requirements.txt .
+RUN pip install confluent-kafka
 RUN pip install \
     --no-cache-dir \
     --no-warn-script-location \
