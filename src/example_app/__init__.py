@@ -28,19 +28,19 @@ def producir_dwh(data):
 
 
 ##################################################################################################################################################################################
-""" def producir_Contactos(data):
-        producer.produce("Log_Contactos", key="contactos", value=data)
-        producer.flush()
-def producir_Pagos(data):
-        producer.produce("Log_Pagos", key="pagos", value=data)
-        producer.flush()
-def producir_Casos(data):
-        producer.produce("Log_Casos", key="casos", value=data)
-        producer.flush()
+#""" def producir_Contactos(data):
+#        producer.produce("Log_Contactos", key="contactos", value=data)
+#        producer.flush()
+#def producir_Pagos(data):
+#        producer.produce("Log_Pagos", key="pagos", value=data)
+#        producer.flush()
+#def producir_Casos(data):
+#        producer.produce("Log_Casos", key="casos", value=data)
+#        producer.flush()
 
-def producir_medios(data):
-        producer.produce("Log_medios", key="medios", value=data)
-        producer.flush() """
+#def producir_medios(data):
+#        producer.produce("Log_medios", key="medios", value=data)
+#        producer.flush() """
 ##################################################################################################################################################################################
 
 #Funciones de prod_message  
@@ -90,52 +90,52 @@ def prod_dwh():
 
 
 ###########################################################################################################################################################################################
-""" @app.route("/producer/contactos/",methods=['POST'])
-def prod_ontactos():
-    token = request.headers.get('token')
-    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-        content = request.json
-        content["ip"]=request.remote_addr
-        respuesta={"Contactos":content}
-        producir_Contactos(json.dumps(respuesta))
-        return respuesta
-    else:
-        return "Token invalido"
+#""" @app.route("/producer/contactos/",methods=['POST'])
+#def prod_ontactos():
+#    token = request.headers.get('token')
+#    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+#        content = request.json
+#       content["ip"]=request.remote_addr
+#        respuesta={"Contactos":content}
+#        producir_Contactos(json.dumps(respuesta))
+#        return respuesta
+#    else:
+#        return "Token invalido"
 
-@app.route("/producer/pagos/",methods=['POST'])
-def prod_pagos():
-    token = request.headers.get('token')
-    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-        content = request.json
-        content["ip"]=request.remote_addr
-        respuesta={"Pagos":content}
-        producir_Pagos(json.dumps(respuesta))
-        return respuesta
-    else:
-        return "Token invalido"
+#@app.route("/producer/pagos/",methods=['POST'])
+#def prod_pagos():
+#    token = request.headers.get('token')
+#    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+#        content = request.json
+#        content["ip"]=request.remote_addr
+#        respuesta={"Pagos":content}
+#        producir_Pagos(json.dumps(respuesta))
+#        return respuesta
+#    else:
+ #       return "Token invalido"
 
-@app.route("/producer/casos/",methods=['POST'])
-def prod_casos():
-    token = request.headers.get('token')
-    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-        content = request.json
-        content["ip"]=request.remote_addr
-        respuesta={"Casos":content}
-        producir_Casos(json.dumps(respuesta))
-        return respuesta
-    else:
-        return "Token invalido"
+#@app.route("/producer/casos/",methods=['POST'])
+#def prod_casos():
+#    token = request.headers.get('token')
+#    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+#        content = request.json
+ #       content["ip"]=request.remote_addr
+ #       respuesta={"Casos":content}
+#        producir_Casos(json.dumps(respuesta))
+#        return respuesta
+  #  else:
+ #       return "Token invalido"
 
-@app.route("/producer/medios/",methods=['POST'])
-def prod_medios():
-    token = request.headers.get('token')
-    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-        content = request.json
-        content["ip"]=request.remote_addr
-        respuesta={"Medios":content}
-        producir_medios(json.dumps(respuesta))
-        return respuesta
-    else:
-        return "Token invalido"
-         """
+#@app.route("/producer/medios/",methods=['POST'])
+#def prod_medios():
+#    token = request.headers.get('token')
+#    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+#        content = request.json
+#       content["ip"]=request.remote_addr
+#        respuesta={"Medios":content}
+#        producir_medios(json.dumps(respuesta))
+#        return respuesta
+#    else:
+#       return "Token invalido"
+#         """
 ############################################################################################################################################################################################
