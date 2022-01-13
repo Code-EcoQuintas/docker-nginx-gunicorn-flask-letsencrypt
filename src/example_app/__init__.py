@@ -28,7 +28,7 @@ def producir_dwh(data):
 
 
 ##################################################################################################################################################################################
-#""" def producir_Contactos(data):
+# def producir_Contactos(data):
 #        producer.produce("Log_Contactos", key="contactos", value=data)
 #        producer.flush()
 #def producir_Pagos(data):
@@ -40,7 +40,7 @@ def producir_dwh(data):
 
 #def producir_medios(data):
 #        producer.produce("Log_medios", key="medios", value=data)
-#        producer.flush() """
+#        producer.flush()
 ##################################################################################################################################################################################
 
 #Funciones de prod_message  
@@ -90,7 +90,7 @@ def prod_dwh():
 
 
 ###########################################################################################################################################################################################
-#""" @app.route("/producer/contactos/",methods=['POST'])
+# @app.route("/producer/contactos/",methods=['POST'])
 #def prod_ontactos():
 #    token = request.headers.get('token')
 #    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
@@ -137,5 +137,5 @@ def prod_dwh():
 #        return respuesta
 #    else:
 #       return "Token invalido"
-#         """
+#
 ############################################################################################################################################################################################
