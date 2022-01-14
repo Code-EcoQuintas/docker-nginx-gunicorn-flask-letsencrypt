@@ -158,17 +158,6 @@ def prod_crm_casos():
     else:
         return "Token invalido"
 
-@app.route("/producer/crm/casos/",methods=['POST'])
-def prod_crm_casos():
-    token = request.headers.get('token')
-    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-        content = request.json 
-        content["ip"]=request.remote_addr
-        respuesta={"CRM":content}
-        producir_crm_casos(json.dumps(respuesta))
-        return respuesta
-    else:
-        return "Token invalido"
 
 @app.route("/producer/crm/email/",methods=['POST'])
 def prod_crm_email():
