@@ -13,129 +13,184 @@ conf = {'bootstrap.servers': "172.16.100.22:9092",
 
 producer = Producer(conf)
 
+
 #Funciones de producción de Topicos
-def producir_ventas(data):
-        producer.produce("Log_ventas_app", key="ventas", value=data)
+
+#Topicos de Ventas____________________________________________________________________________________________________________________________
+def producir_ventas_pagos(data):
+        producer.produce("topic_ventas_pagos", key="Pagos", value=data)
         producer.flush()
-
-def producir_CRM(data):
-        producer.produce("Log_CRM_app", key="CRM", value=data)
+def producir_ventas_venta(data):
+        producer.produce("topic_ventas_venta", key="Ventas", value=data)
         producer.flush()
+def producir_ventas_cotizacion(data):
+        producer.produce("topic_ventas_cotizacion", key="Cotizador", value=data)
+        producer.flush()
+def producir_ventas_fe(data):
+        producer.produce("topic_ventas_fe", key="FacturaElectronica", value=data)
+        producer.flush()
+def producir_ventas_int_conta(data):
+        producer.produce("topic_ventas_int_conta", key="Dag-AsientosContables", value=data)
+        producer.flush()
+#______________________________________________________________________________________________________________________________________________
 
-def producir_dwh(data):
-        producer.produce("Log_dwh", key="dwh", value=data)
-        producer.flush() 
+#Topicos de CRM________________________________________________________________________________________________________________________________
+def producir_crm_clientes(data):
+        producer.produce("topic_crm_clientes", key="Clientes", value=data)
+        producer.flush()
+def producir_crm_contactos(data):
+        producer.produce("topic_crm_contactos", key="Contactos", value=data)
+        producer.flush()
+def producir_crm_casos(data):
+        producer.produce("topic_crm_casos", key="Casos", value=data)
+        producer.flush()
+def producir_crm_camp(data):
+        producer.produce("topic_crm_camp", key="Campañas", value=data)
+        producer.flush()
+def producir_int_cierres(data):
+        producer.produce("topic_int_cierres", key="Dag-Cierres", value=data)
+        producer.flush()
+#______________________________________________________________________________________________________________________________________________
 
 
-##################################################################################################################################################################################
-# def producir_Contactos(data):
-#        producer.produce("Log_Contactos", key="contactos", value=data)
-#        producer.flush()
-#def producir_Pagos(data):
-#        producer.produce("Log_Pagos", key="pagos", value=data)
-#        producer.flush()
-#def producir_Casos(data):
-#        producer.produce("Log_Casos", key="casos", value=data)
-#        producer.flush()
 
-#def producir_medios(data):
-#        producer.produce("Log_medios", key="medios", value=data)
-#        producer.flush()
-##################################################################################################################################################################################
-
-#Funciones de prod_message  
-
-
-#pprint.pprint(respuesta)
-
+#Funciones de prod_message
 @app.route("/")
 def root():
     return "Hola API ECOQUINTAS"
 
-@app.route("/producer/ventas_app/",methods=['POST'])
-def prod_ventas():
+#Funciones de prod_ventas______________________________________________________________________________________________________________________
+@app.route("/producer/ventas/pago/",methods=['POST'])
+def prod_ventas_pagos():
     token = request.headers.get('token')
     if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
         content = request.json 
         content["ip"]=request.remote_addr
         respuesta={"Ventas":content}
-        producir_ventas(json.dumps(respuesta))
+        producir_ventas_pagos(json.dumps(respuesta))
         return respuesta
     else:
         return "Token invalido"
 
-@app.route("/producer/CRM_app/",methods=['POST'])
-def prod_CRM():
+@app.route("/producer/ventas/venta/",methods=['POST'])
+def prod_ventas_venta():
     token = request.headers.get('token')
     if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-        content = request.json
+        content = request.json 
         content["ip"]=request.remote_addr
-        respuesta={"CRM":content}
-        producir_CRM(json.dumps(respuesta))
+        respuesta={"Ventas":content}
+        producir_ventas_venta(json.dumps(respuesta))
         return respuesta
     else:
         return "Token invalido"
 
-@app.route("/producer/dwh/",methods=['POST'])
-def prod_dwh():
+@app.route("/producer/ventas/cotizacion/",methods=['POST'])
+def prod_ventas_cotizacion():
     token = request.headers.get('token')
     if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-        content = request.json
+        content = request.json 
         content["ip"]=request.remote_addr
-        respuesta={"dwh":content}
-        producir_dwh(json.dumps(respuesta))
+        respuesta={"Ventas":content}
+        producir_ventas_cotizacion(json.dumps(respuesta))
         return respuesta
     else:
         return "Token invalido"
 
+@app.route("/producer/ventas/facturaelectronica/",methods=['POST'])
+def prod_ventas_fe():
+    token = request.headers.get('token')
+    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+        content = request.json 
+        content["ip"]=request.remote_addr
+        respuesta={"Ventas":content}
+        producir_ventas_fe(json.dumps(respuesta))
+        return respuesta
+    else:
+        return "Token invalido"
 
-###########################################################################################################################################################################################
-# @app.route("/producer/contactos/",methods=['POST'])
-#def prod_ontactos():
-#    token = request.headers.get('token')
-#    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-#        content = request.json
-#       content["ip"]=request.remote_addr
-#        respuesta={"Contactos":content}
-#        producir_Contactos(json.dumps(respuesta))
-#        return respuesta
-#    else:
-#        return "Token invalido"
+@app.route("/producer/integracion/conta/",methods=['POST'])
+def prod_int_conta():
+    token = request.headers.get('token')
+    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+        content = request.json 
+        content["ip"]=request.remote_addr
+        respuesta={"Ventas":content}
+        producir_ventas_int_conta(json.dumps(respuesta))
+        return respuesta
+    else:
+        return "Token invalido"
 
-#@app.route("/producer/pagos/",methods=['POST'])
-#def prod_pagos():
-#    token = request.headers.get('token')
-#    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-#        content = request.json
-#        content["ip"]=request.remote_addr
-#        respuesta={"Pagos":content}
-#        producir_Pagos(json.dumps(respuesta))
-#        return respuesta
-#    else:
- #       return "Token invalido"
+#Funciones de prod_crm______________________________________________________________________________________________________________________
 
-#@app.route("/producer/casos/",methods=['POST'])
-#def prod_casos():
-#    token = request.headers.get('token')
-#    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-#        content = request.json
- #       content["ip"]=request.remote_addr
- #       respuesta={"Casos":content}
-#        producir_Casos(json.dumps(respuesta))
-#        return respuesta
-  #  else:
- #       return "Token invalido"
+@app.route("/producer/crm/clientes/",methods=['POST'])
+def prod_crm_clientes():
+    token = request.headers.get('token')
+    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+        content = request.json 
+        content["ip"]=request.remote_addr
+        respuesta={"Ventas":content}
+        producir_crm_clientes(json.dumps(respuesta))
+        return respuesta
+    else:
+        return "Token invalido"
 
-#@app.route("/producer/medios/",methods=['POST'])
-#def prod_medios():
-#    token = request.headers.get('token')
-#    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
-#        content = request.json
-#       content["ip"]=request.remote_addr
-#        respuesta={"Medios":content}
-#        producir_medios(json.dumps(respuesta))
-#        return respuesta
-#    else:
-#       return "Token invalido"
-#
-############################################################################################################################################################################################
+@app.route("/producer/crm/contactos/",methods=['POST'])
+def prod_ventas_contactos():
+    token = request.headers.get('token')
+    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+        content = request.json 
+        content["ip"]=request.remote_addr
+        respuesta={"Ventas":content}
+        producir_crm_contactos(json.dumps(respuesta))
+        return respuesta
+    else:
+        return "Token invalido"
+
+@app.route("/producer/crm/casos/",methods=['POST'])
+def prod_crm_casos():
+    token = request.headers.get('token')
+    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+        content = request.json 
+        content["ip"]=request.remote_addr
+        respuesta={"Ventas":content}
+        producir_crm_casos(json.dumps(respuesta))
+        return respuesta
+    else:
+        return "Token invalido"
+
+@app.route("/producer/crm/casos/",methods=['POST'])
+def prod_crm_casos():
+    token = request.headers.get('token')
+    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+        content = request.json 
+        content["ip"]=request.remote_addr
+        respuesta={"Ventas":content}
+        producir_crm_casos(json.dumps(respuesta))
+        return respuesta
+    else:
+        return "Token invalido"
+
+@app.route("/producer/crm/email/",methods=['POST'])
+def prod_crm_email():
+    token = request.headers.get('token')
+    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+        content = request.json 
+        content["ip"]=request.remote_addr
+        respuesta={"Ventas":content}
+        producir_crm_camp(json.dumps(respuesta))
+        return respuesta
+    else:
+        return "Token invalido"
+
+@app.route("/producer/integracion/cierres/",methods=['POST'])
+def prod_int_cierres():
+    token = request.headers.get('token')
+    if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
+        content = request.json 
+        content["ip"]=request.remote_addr
+        respuesta={"Ventas":content}
+        producir_int_cierres(json.dumps(respuesta))
+        return respuesta
+    else:
+        return "Token invalido"
+#______________________________________________________________________________________________________________________________________________________________________
