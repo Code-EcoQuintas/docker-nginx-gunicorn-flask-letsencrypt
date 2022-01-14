@@ -18,37 +18,37 @@ producer = Producer(conf)
 
 #Topicos de Ventas____________________________________________________________________________________________________________________________
 def producir_ventas_pagos(data):
-        producer.produce("topic_ventas_pagos", key="Pagos", value=data)
+        producer.produce("topic_ventas_pagos", key="pagos", value=data)
         producer.flush()
 def producir_ventas_venta(data):
-        producer.produce("topic_ventas_venta", key="Ventas", value=data)
+        producer.produce("topic_ventas_venta", key="ventas", value=data)
         producer.flush()
 def producir_ventas_cotizacion(data):
-        producer.produce("topic_ventas_cotizacion", key="Cotizador", value=data)
+        producer.produce("topic_ventas_cotizacion", key="cotizador", value=data)
         producer.flush()
 def producir_ventas_fe(data):
-        producer.produce("topic_ventas_fe", key="FacturaElectronica", value=data)
+        producer.produce("topic_ventas_fe", key="facturaelectronica", value=data)
         producer.flush()
 def producir_ventas_int_conta(data):
-        producer.produce("topic_ventas_int_conta", key="Dag-AsientosContables", value=data)
+        producer.produce("topic_ventas_int_conta", key="dag-asientosContables", value=data)
         producer.flush()
 #______________________________________________________________________________________________________________________________________________
 
 #Topicos de CRM________________________________________________________________________________________________________________________________
 def producir_crm_clientes(data):
-        producer.produce("topic_crm_clientes", key="Clientes", value=data)
+        producer.produce("topic_crm_clientes", key="clientes", value=data)
         producer.flush()
 def producir_crm_contactos(data):
-        producer.produce("topic_crm_contactos", key="Contactos", value=data)
+        producer.produce("topic_crm_contactos", key="contactos", value=data)
         producer.flush()
 def producir_crm_casos(data):
-        producer.produce("topic_crm_casos", key="Casos", value=data)
+        producer.produce("topic_crm_casos", key="casos", value=data)
         producer.flush()
 def producir_crm_camp(data):
-        producer.produce("topic_crm_camp", key="Campañas", value=data)
+        producer.produce("topic_crm_camp", key="campañas", value=data)
         producer.flush()
 def producir_int_cierres(data):
-        producer.produce("topic_int_cierres", key="Dag-Cierres", value=data)
+        producer.produce("topic_int_cierres", key="dag-cierres", value=data)
         producer.flush()
 #______________________________________________________________________________________________________________________________________________
 
@@ -128,7 +128,7 @@ def prod_crm_clientes():
     if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
         content = request.json 
         content["ip"]=request.remote_addr
-        respuesta={"Ventas":content}
+        respuesta={"CRM":content}
         producir_crm_clientes(json.dumps(respuesta))
         return respuesta
     else:
@@ -140,7 +140,7 @@ def prod_ventas_contactos():
     if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
         content = request.json 
         content["ip"]=request.remote_addr
-        respuesta={"Ventas":content}
+        respuesta={"CRM":content}
         producir_crm_contactos(json.dumps(respuesta))
         return respuesta
     else:
@@ -152,7 +152,7 @@ def prod_crm_casos():
     if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
         content = request.json 
         content["ip"]=request.remote_addr
-        respuesta={"Ventas":content}
+        respuesta={"CRM":content}
         producir_crm_casos(json.dumps(respuesta))
         return respuesta
     else:
@@ -164,7 +164,7 @@ def prod_crm_casos():
     if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
         content = request.json 
         content["ip"]=request.remote_addr
-        respuesta={"Ventas":content}
+        respuesta={"CRM":content}
         producir_crm_casos(json.dumps(respuesta))
         return respuesta
     else:
@@ -176,7 +176,7 @@ def prod_crm_email():
     if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
         content = request.json 
         content["ip"]=request.remote_addr
-        respuesta={"Ventas":content}
+        respuesta={"CRM":content}
         producir_crm_camp(json.dumps(respuesta))
         return respuesta
     else:
@@ -188,7 +188,7 @@ def prod_int_cierres():
     if (token=="3e26b17c-3e96-40d6-91fa-7f355bf2c570"):
         content = request.json 
         content["ip"]=request.remote_addr
-        respuesta={"Ventas":content}
+        respuesta={"Int":content}
         producir_int_cierres(json.dumps(respuesta))
         return respuesta
     else:
