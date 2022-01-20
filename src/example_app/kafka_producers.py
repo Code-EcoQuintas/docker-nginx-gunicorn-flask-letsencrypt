@@ -5,6 +5,7 @@ import socket
 import json
 import pprint
 
+
 app = Flask(__name__)
 
 #Conexión a Kafka
